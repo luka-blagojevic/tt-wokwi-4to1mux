@@ -1,38 +1,33 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/wokwi_test/badge.svg) ![](../../workflows/fpga/badge.svg)
+![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/wokwi_test/badge.svg)
 
-# Tiny Tapeout Wokwi Project Template
+# 4 to 1 Multiplexer (MUX)
 
-- [Read the documentation for project](docs/info.md)
+## Overview
 
-## What is Tiny Tapeout?
+This circuit implements a 4 to 1 Multiplexer using basic 2-input logic gates in Wokwi. A MUX acts as a digital switch, selecting one of four data inputs (**A, B, C, and D**) to be routed to a single output (**Y**). The selection is controlled by two select lines (**S1 and S0**).
 
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital and analog designs manufactured on a real chip.
+## Inputs
 
-To learn more and get started, visit https://tinytapeout.com.
+The logical inputs are mapped to the `io_in` pins of the chip, which can be controlled by a DIP switch in the simulation.
 
-## Wokwi Projects
+* **S1** → `IN0` (Select Line 1)
+* **S0** → `IN1` (Select Line 0)
+* **A** → `IN2` (Data Input A)
+* **B** → `IN3` (Data Input B)
+* **C** → `IN4` (Data Input C)
+* **D** → `IN5` (Data Input D)
 
-Edit the [info.yaml](info.yaml) and change the `wokwi_id` to the ID of your Wokwi project. You can find the ID in the URL of your project, it's the big number after `wokwi.com/projects/`.
+## Outputs
 
-The GitHub action will automatically fetch the digital netlist from Wokwi and build the ASIC files.
+* **Y** → `OUT0`: Selected Data Output
 
-## Enable GitHub actions to build the results page
+## How to Use
 
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
+Use the select line inputs (`IN0` and `IN1`) to choose which data channel to pass to the output. The output `OUT0` will then mirror the state of the selected data input, as described in the functional table below.
 
-## Resources
-
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
-
-## What next?
-
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
+| S1 (`IN0`) | S0 (`IN1`) | Output Y is connected to... |
+| :--------: | :--------: | :-------------------------: |
+|     0      |     0      |     Data Input A (`IN2`)      |
+|     0      |     1      |     Data Input B (`IN3`)      |
+|     1      |     0      |     Data Input C (`IN4`)      |
+|     1      |     1      |     Data Input D (`IN5`)      |
